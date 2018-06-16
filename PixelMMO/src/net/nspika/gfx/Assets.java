@@ -8,7 +8,7 @@ import net.nspika.gfx.SpriteSheet;
 public class Assets {
 
 	private static final int width = 16, height = 16;
-	public static BufferedImage grass, dirt, stone;
+	public static BufferedImage voidtile, grass, dirt, stone;
 	public static BufferedImage[] player_down;
 	public static BufferedImage[] player_up;
 	public static BufferedImage[] player_left;
@@ -17,6 +17,7 @@ public class Assets {
 
 	public static void init() {
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/SpriteSheet.png"));
+		voidtile = sheet.crop(48, 0, width, height);
 		grass = sheet.crop(16, 16, width, height);
 		dirt = sheet.crop(176, 16, width, height);
 		stone = sheet.crop(256, 0, width, height);
