@@ -4,15 +4,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 import net.nspika.gfx.Assets;
+import net.nspika.gfx.Camera;
 import net.nspika.gfx.Display;
+import net.nspika.handler.Handler;
 import net.nspika.handler.KeyHandler;
 import net.nspika.handler.MouseHandler;
 import net.nspika.states.GameState;
 import net.nspika.states.MenuState;
 import net.nspika.states.State;
-
-import java.awt.*;
-import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
 
@@ -33,6 +32,10 @@ public class Game implements Runnable {
     //Input
     private KeyHandler keyHandler;
     private MouseHandler mouseHandler;
+    
+    private Handler handler;
+    
+    private Camera camera;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -48,10 +51,13 @@ public class Game implements Runnable {
         display.getFrame().addKeyListener(keyHandler);
         display.getFrame().addMouseListener(mouseHandler);
         Assets.init();
+        
+        camera = new Camera(this, 0, 0);
+        handler = new Handler(this);
 
         //States initialization
-        menuState = new MenuState(this);
-        gameState = new GameState(this);
+        menuState = new MenuState(handler);
+        gameState = new GameState(handler);
         State.setState(gameState);
     }
 
@@ -111,6 +117,18 @@ public class Game implements Runnable {
 
     public KeyHandler getKeyHandler(){
         return keyHandler;
+    }
+    
+    public Camera getCamera() {
+    	return camera;
+    }
+    
+    public int getWidth() {
+    	return width;
+    }
+    
+    public int getHeight() {
+    	return height;
     }
 
     private void render() {

@@ -1,9 +1,10 @@
 package net.nspika.entities.creatures;
 
 import net.nspika.entities.Entity;
+import net.nspika.handler.Handler;
 
 public abstract class Creature extends Entity {
-
+	
     public static final int D_HEALTH = 10;
     public static final float D_SPEED = 3.0f;
     public static final int D_WIDTH = 32, D_HEIGHT = 32;
@@ -12,8 +13,8 @@ public abstract class Creature extends Entity {
     protected float speed;
     protected float xMove, yMove;
 
-    public Creature(float x, float y, int width, int height) {
-        super(x, y, width, height);
+    public Creature(Handler handler, float x, float y, int width, int height) {
+        super(handler, x, y, width, height);
         health = D_HEALTH;
         speed = D_SPEED;
         xMove = 0;

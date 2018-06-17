@@ -3,9 +3,9 @@ package net.nspika.entities.creatures;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import net.nspika.game.Game;
 import net.nspika.gfx.Animation;
 import net.nspika.gfx.Assets;
+import net.nspika.handler.Handler;
 
 
 
@@ -18,11 +18,8 @@ public class Player extends Creature {
 
     private int direction = 0;
 
-    private Game game;
-
-    public Player(Game game, float x, float y) {
-        super(x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
-        this.game = game;
+    public Player(Handler handler, float x, float y) {
+        super(handler, x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
 
         //Animations
         anDown = new Animation(135, Assets.player_down);
@@ -39,19 +36,20 @@ public class Player extends Creature {
         anRight.tick();
         getInput();
         move();
+        handler.getCamera().centerOnEntity(this);
     }
 
     private void getInput() {
         xMove = 0;
         yMove = 0;
 
-        if (game.getKeyHandler().up)
+        if (handler.getKeyHandler().up)
             yMove = -speed;
-        if (game.getKeyHandler().down)
+        if (handler.getKeyHandler().down)
             yMove = speed;
-        if (game.getKeyHandler().left)
+        if (handler.getKeyHandler().left)
             xMove = -speed;
-        if (game.getKeyHandler().right)
+        if (handler.getKeyHandler().right)
             xMove = speed;
     }
 
@@ -76,7 +74,7 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(getCurrentAnimation(), (int)x, (int)y, width, height, null);
+        g.drawImage(getCurrentAnimation(), (int)(x - handler.getCamera().getxOffset()), (int)(y - handler.getCamera().getyOffset()), width, height, null);
 
     }
 }

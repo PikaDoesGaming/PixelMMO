@@ -2,13 +2,18 @@ package net.nspika.entities;
 
 import java.awt.Graphics;
 
+import net.nspika.game.Game;
+import net.nspika.handler.Handler;
+
 public abstract class Entity {
 
     protected float x, y;
     protected int width, height;
+	protected Handler handler;
 
-    public Entity(float x, float y, int width, int height){
-        this.x = x;
+    public Entity(Handler handler, float x, float y, int width, int height){
+        this.handler = handler;
+    	this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;

@@ -19,7 +19,7 @@ public class Assets {
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/SpriteSheet.png"));
 		voidtile = sheet.crop(48, 0, width, height);
 		grass = sheet.crop(16, 16, width, height);
-		dirt = sheet.crop(176, 16, width, height);
+		dirt = sheet.crop(176, 0, width, height);
 		stone = sheet.crop(256, 0, width, height);
 
 		player_standing = new BufferedImage[4];
