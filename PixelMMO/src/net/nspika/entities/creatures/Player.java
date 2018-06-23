@@ -1,11 +1,13 @@
 package net.nspika.entities.creatures;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import net.nspika.gfx.Animation;
 import net.nspika.gfx.Assets;
 import net.nspika.handler.Handler;
+import net.nspika.tiles.Tile;
 
 
 
@@ -21,6 +23,11 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
 
+        bounds.x = 48;
+        bounds.y = 68;
+        bounds.width = 32;
+        bounds.height = 48;
+        
         //Animations
         anDown = new Animation(135, Assets.player_down);
         anLeft = new Animation(135, Assets.player_left);
@@ -30,6 +37,21 @@ public class Player extends Creature {
 
     @Override
     public void tick() {
+    	if(x < 0) {
+    		x += speed;
+    	}
+    	if(x > handler.getLevel().getWidth() * Tile.TILEWIDTH - handler.getLevel().getHeight()) {
+    		x -= speed;
+    	}
+    	
+    	if(y < 0) {
+    		y += speed;
+    	}
+    	
+    	if(y > handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getLevel().getHeight()) {
+    		y -= speed;
+    	}
+    	
         anDown.tick();
         anUp.tick();
         anLeft.tick();
@@ -75,6 +97,7 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimation(), (int)(x - handler.getCamera().getxOffset()), (int)(y - handler.getCamera().getyOffset()), width, height, null);
-
+        g.setColor(Color.gray);
+        g.fillRect((int) (x + bounds.x - handler.getCamera().getxOffset()), (int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);
     }
 }

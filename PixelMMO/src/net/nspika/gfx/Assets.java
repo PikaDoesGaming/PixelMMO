@@ -14,20 +14,27 @@ public class Assets {
 	public static BufferedImage[] player_left;
 	public static BufferedImage[] player_right;
 	public static BufferedImage[] player_standing;
-
+	public static BufferedImage[] trees;
+	public static BufferedImage[] bushes;
+	
 	public static void init() {
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/SpriteSheet.png"));
 		voidtile = sheet.crop(48, 0, width, height);
 		grass = sheet.crop(16, 16, width, height);
 		dirt = sheet.crop(176, 0, width, height);
 		stone = sheet.crop(256, 0, width, height);
-
+		
+		trees = new BufferedImage[30];
+		bushes = new BufferedImage[30];
 		player_standing = new BufferedImage[4];
 		player_down = new BufferedImage[6];
 		player_left = new BufferedImage[4];
 		player_right = new BufferedImage[4];
 		player_up = new BufferedImage[4];
 
+		// Bushes
+		bushes[26] = sheet.crop(0, height*15, width*3, height*3);
+		
 		// Player Standing
 		player_standing[0] = sheet.crop(0, height * 7, width * 2, height * 2);
 		player_standing[1] = sheet.crop(0, height * 9, width * 2, height * 2);

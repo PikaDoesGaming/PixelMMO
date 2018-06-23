@@ -52,8 +52,9 @@ public class Game implements Runnable {
         display.getFrame().addMouseListener(mouseHandler);
         Assets.init();
         
-        camera = new Camera(this, 0, 0);
         handler = new Handler(this);
+        camera = new Camera(handler, 0, 0);
+       
 
         //States initialization
         menuState = new MenuState(handler);
