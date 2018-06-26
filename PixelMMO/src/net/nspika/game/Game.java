@@ -75,6 +75,8 @@ public class Game implements Runnable {
 
     public synchronized void start() {
         running = true;
+        
+        //Initializing Multiplayer
         int reply = JOptionPane.showConfirmDialog(null, "Do you want to Host the Server?", title, JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
         	System.out.println("Starting the Server...");
