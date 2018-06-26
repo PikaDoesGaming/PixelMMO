@@ -3,6 +3,8 @@ package net.nspika.handler;
 import net.nspika.game.Game;
 import net.nspika.gfx.Camera;
 import net.nspika.levels.Level;
+import net.nspika.net.GameClient;
+import net.nspika.net.GameServer;
 
 public class Handler {
 
@@ -45,5 +47,14 @@ public class Handler {
 		this.level = level;
 	}
 
+	/*
+	public GameClient getGameClient() {
+		return GameClient;
+	}
+	
+	public GameServer getGameServer() {
+		
+	}
+	*/
 
 }

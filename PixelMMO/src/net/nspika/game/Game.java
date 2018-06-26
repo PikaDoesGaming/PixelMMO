@@ -3,12 +3,18 @@ package net.nspika.game;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JOptionPane;
+
+import org.omg.Messaging.SyncScopeHelper;
+
 import net.nspika.gfx.Assets;
 import net.nspika.gfx.Camera;
 import net.nspika.gfx.Display;
 import net.nspika.handler.Handler;
 import net.nspika.handler.KeyHandler;
 import net.nspika.handler.MouseHandler;
+import net.nspika.net.GameClient;
+import net.nspika.net.GameServer;
 import net.nspika.states.GameState;
 import net.nspika.states.MenuState;
 import net.nspika.states.State;
@@ -36,6 +42,9 @@ public class Game implements Runnable {
     private Handler handler;
     
     private Camera camera;
+    
+    private GameServer gameServer;
+    private GameClient gameClient;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -55,17 +64,27 @@ public class Game implements Runnable {
         handler = new Handler(this);
         camera = new Camera(handler, 0, 0);
        
-
         //States initialization
         menuState = new MenuState(handler);
         gameState = new GameState(handler);
         State.setState(gameState);
+        gameClient.sendData("ping".getBytes());
+        
     }
+    
 
     public synchronized void start() {
         running = true;
-        new Thread(this).start();
-    }
+        int reply = JOptionPane.showConfirmDialog(null, "Do you want to Host the Server?", title, JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+        	System.out.println("Starting the Server...");
+      		gameServer = new GameServer(this);
+      		gameServer.start();
+        }
+           	gameClient = new GameClient(this, "localhost");
+           	gameClient.start();
+           	new Thread(this).start();
+       }
 
     private synchronized void stop() {
         running = false;

@@ -8,53 +8,48 @@ import javax.swing.WindowConstants;
 
 public class Display {
 
-    public static int tickcount = 0;
-    private static JFrame frame;
-    private Canvas canvas;
+	public static int tickcount = 0;
+	private static JFrame frame;
+	private Canvas canvas;
 
-    private int frames;
-    private int ticks;
+	private String title;
+	private int width, height;
 
-    private String title;
-    private int width, height;
+	public Display(String title, int width, int height) {
+		this.title = title;
+		this.width = width;
+		this.height = height;
 
-    public Display(String title, int width, int height){
-        this.title = title;
-        this.width = width;
-        this.height = height;
+		frame = new JFrame(title);
+		createDisplay();
+	}
 
-        frame = new JFrame(title);
-        createDisplay();
-    }
+	public void tick(int frames, int ticks) {
+		frame.setTitle(title + " FPS: " + frames + " | " + "Ticks: " + ticks);
+	}
 
-    public void tick(int frames, int ticks){
-        this.frames = frames;
-        this.ticks = ticks;
-        frame.setTitle(title + " FPS: " + frames + " | " + "Ticks: " + ticks);
-    }
+	private void createDisplay() {
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
-    private void createDisplay(){
-        frame.setSize(width, height);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false);
 
-        canvas = new Canvas();
-        canvas.setPreferredSize(new Dimension(width, height));
-        canvas.setMaximumSize(new Dimension(width, height));
-        canvas.setMinimumSize(new Dimension(width, height));
-        canvas.setFocusable(false);
+		frame.add(canvas);
+		frame.pack();
+	}
 
-        frame.add(canvas);
-        frame.pack();
-    }
+	public Canvas getCanvas() {
+		return canvas;
+	}
 
-    public Canvas getCanvas(){
-        return canvas;
-    }
-
-    public JFrame getFrame(){
-        return frame;
-    }
+	public JFrame getFrame() {
+		return frame;
+	}
 }

@@ -1,6 +1,7 @@
 package net.nspika.entities.creatures;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -9,20 +10,21 @@ import net.nspika.gfx.Assets;
 import net.nspika.handler.Handler;
 import net.nspika.tiles.Tile;
 
-
-
 public class Player extends Creature {
 
     private Animation anDown;
     private Animation anUp;
     private Animation anLeft;
     private Animation anRight;
+    
+    private String username;
 
     private int direction = 0;
 
-    public Player(Handler handler, float x, float y) {
+    public Player(Handler handler, float x, float y, String username) {
         super(handler, x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
-
+        this.username = username;
+        
         bounds.x = 48;
         bounds.y = 68;
         bounds.width = 32;
@@ -99,5 +101,9 @@ public class Player extends Creature {
         g.drawImage(getCurrentAnimation(), (int)(x - handler.getCamera().getxOffset()), (int)(y - handler.getCamera().getyOffset()), width, height, null);
         g.setColor(Color.gray);
         g.fillRect((int) (x + bounds.x - handler.getCamera().getxOffset()), (int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);
+        g.setColor(Color.WHITE);
+        Font myFont = new Font("Serif", Font.BOLD, 50);
+        g.setFont(myFont);
+        g.drawString(username, (int) (x + bounds.x - handler.getCamera().getxOffset()) - 32, (int) (y + bounds.y - handler.getCamera().getyOffset()) - 70);
     }
 }
