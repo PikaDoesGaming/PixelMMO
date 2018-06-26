@@ -99,8 +99,8 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
         g.drawImage(getCurrentAnimation(), (int)(x - handler.getCamera().getxOffset()), (int)(y - handler.getCamera().getyOffset()), width, height, null);
-        g.setColor(Color.gray);
-        g.fillRect((int) (x + bounds.x - handler.getCamera().getxOffset()), (int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);
+//        g.setColor(Color.gray);
+//        g.fillRect((int) (x + bounds.x - handler.getCamera().getxOffset()), (int)(y + bounds.y - handler.getCamera().getyOffset()), bounds.width, bounds.height);
         g.setColor(Color.WHITE);
         Font myFont = new Font("Serif", Font.BOLD, 50);
         g.setFont(myFont);
