@@ -2,14 +2,19 @@ package net.nspika.handler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+import net.nspika.utils.InputField;
 
 public class KeyHandler implements KeyListener {
 
     private boolean[] keys;
     public boolean up, down, left, right;
+    
+    private ArrayList<InputField> activeInputFields = new ArrayList<>();
 
     public KeyHandler() {
-        keys = new boolean[256];
+        keys = new boolean[1024];
     }
 
     public void tick() {
@@ -36,5 +41,24 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         keys[e.getKeyCode()] = false;
     }
+    
+	public boolean isKeyPressed(int id) {
+		return keys[id];
+	}
+	
+	public boolean[] getKeys() {
+		return keys;
+	}
+	
+	
+	public void addActiveInputField(InputField input) {
+		if(!activeInputFields.contains(input)) {
+			activeInputFields.add(input);
+		}
+	}
+	
+	public void removeActiveInputFields(InputField input) {
+		activeInputFields.remove(input);
+	}
 
 }

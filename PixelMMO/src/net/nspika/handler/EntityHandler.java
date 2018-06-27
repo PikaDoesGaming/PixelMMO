@@ -1,19 +1,20 @@
-package net.nspika.entities;
+package net.nspika.handler;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import net.nspika.entities.Entity;
 import net.nspika.entities.creatures.Player;
-import net.nspika.handler.Handler;
 
-public class EntityManager {
+public class EntityHandler {
 
 	private Handler handler;
 	private Player player;
 	
 	public ArrayList<Entity> entities;
+	public ArrayList<Player> players;
 	
-	public EntityManager(Handler handler, Player player) {
+	public EntityHandler(Handler handler, Player player) {
 		this.handler = handler;
 		this.player = player;
 		entities = new ArrayList<Entity>();

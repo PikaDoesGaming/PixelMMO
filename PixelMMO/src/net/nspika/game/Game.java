@@ -18,6 +18,7 @@ import net.nspika.net.GameServer;
 import net.nspika.states.GameState;
 import net.nspika.states.MenuState;
 import net.nspika.states.State;
+import net.nspika.utils.Fonts;
 
 public class Game implements Runnable {
 
@@ -56,6 +57,7 @@ public class Game implements Runnable {
 
     //Initialize classes etc.
     private void init() {
+    	Fonts.LoadFonts();
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyHandler);
         display.getFrame().addMouseListener(mouseHandler);
@@ -67,7 +69,7 @@ public class Game implements Runnable {
         //States initialization
         menuState = new MenuState(handler);
         gameState = new GameState(handler);
-        State.setState(gameState);
+        State.setState(menuState);
         gameClient.sendData("ping".getBytes());
         
     }
@@ -137,22 +139,6 @@ public class Game implements Runnable {
         }
     }
 
-    public KeyHandler getKeyHandler(){
-        return keyHandler;
-    }
-    
-    public Camera getCamera() {
-    	return camera;
-    }
-    
-    public int getWidth() {
-    	return width;
-    }
-    
-    public int getHeight() {
-    	return height;
-    }
-
     private void render() {
         //Buffer Strategy
         BufferStrategy bs = display.getCanvas().getBufferStrategy();
@@ -182,5 +168,21 @@ public class Game implements Runnable {
             State.getSate().tick();
         }
         tickCount++;
+    }
+    
+    public KeyHandler getKeyHandler(){
+        return keyHandler;
+    }
+    
+    public Camera getCamera() {
+    	return camera;
+    }
+    
+    public int getWidth() {
+    	return width;
+    }
+    
+    public int getHeight() {
+    	return height;
     }
 }

@@ -8,9 +8,9 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.nspika.entities.EntityManager;
 import net.nspika.entities.creatures.PlayerMP;
 import net.nspika.game.Game;
+import net.nspika.handler.EntityHandler;
 import net.nspika.handler.Handler;
 import net.nspika.net.packets.Packet;
 import net.nspika.net.packets.Packet.PacketTypes;
@@ -68,7 +68,7 @@ public class GameServer extends Thread {
 			}
 			if (player != null) {
 				this.connectedPlayers.add(player);
-				EntityManager entityManager = new EntityManager(handler, player);
+				EntityHandler entityManager = new EntityHandler(handler, player);
 				
 			}
 			break;

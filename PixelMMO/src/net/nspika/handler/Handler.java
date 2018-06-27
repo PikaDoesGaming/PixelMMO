@@ -8,7 +8,7 @@ import net.nspika.net.GameServer;
 
 public class Handler {
 
-	private Game game;
+	private static Game game;
 	private Level level;
 	
 	public Handler(Game game) {
@@ -23,15 +23,15 @@ public class Handler {
 		return game.getKeyHandler();
 	}
 	
-	public int getWidth() {
+	public static int getWidth() {
 		return game.getWidth();
 	}
 	
-	public int getHeight() {
+	public static int getHeight() {
 		return game.getHeight();
 	}
 	
-	public Game getGame() {
+	public static Game getGame() {
 		return game;
 	}
 	

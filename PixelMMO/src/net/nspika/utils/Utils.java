@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Utils {
+	
+	public Utils() {
+		
+	}
 
 	public static String loadFileAsString(String path) {
 		StringBuilder builder = new StringBuilder();
@@ -31,8 +35,8 @@ public class Utils {
 		}
 	}
 	
-	public Utils() {
-		
+	public static boolean isClicked(boolean clicked) {
+		return clicked;
 	}
 
 }

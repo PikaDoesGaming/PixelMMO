@@ -2,9 +2,9 @@ package net.nspika.levels;
 
 import java.awt.Graphics;
 
-import net.nspika.entities.EntityManager;
 import net.nspika.entities.creatures.Player;
 import net.nspika.entities.statics.Tree;
+import net.nspika.handler.EntityHandler;
 import net.nspika.handler.Handler;
 import net.nspika.tiles.Tile;
 import net.nspika.utils.Utils;
@@ -16,11 +16,11 @@ public class Level {
 	private int height;
 	private int[][] tiles;
 	private int spawnX, spawnY;
-	private EntityManager entityManager;
+	private EntityHandler entityManager;
 
 	public Level(Handler handler, String path) {
 		this.handler = handler;
-		entityManager = new EntityManager(handler, new Player(handler, 100, 100, "Test"));
+		entityManager = new EntityHandler(handler, new Player(handler, 100, 100, "Test"));
 		
 		entityManager.addEntity(new Tree(handler, 10, 250));
 		
