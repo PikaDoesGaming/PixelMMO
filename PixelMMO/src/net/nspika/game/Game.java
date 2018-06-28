@@ -69,7 +69,7 @@ public class Game implements Runnable {
         //States initialization
         menuState = new MenuState(handler);
         gameState = new GameState(handler);
-        State.setState(menuState);
+        State.setState(gameState);
         gameClient.sendData("ping".getBytes());
         
     }
@@ -163,6 +163,7 @@ public class Game implements Runnable {
 
     private void tick() {
         keyHandler.tick();
+        MouseHandler.tick();
 
         if(State.getSate() != null){
             State.getSate().tick();

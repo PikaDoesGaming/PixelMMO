@@ -14,24 +14,18 @@ import net.nspika.handler.Handler;
 
 public class Fonts {
 	public static Font playerNameFont = new Font("Arial", Font.PLAIN, 25);
-	public static Font scoreFont = new Font("Arial", Font.BOLD, 45);
-	public static Font killFeedFont = new Font("Arial", Font.PLAIN, 30);
 	
-	public static Font lobbyTeamNameFont = new Font("Arial", Font.BOLD, 45);
 	public static Font lobbyNameFont = new Font("Arial", Font.PLAIN, 30);
 	public static Font buttonFont = new Font("Arial", Font.PLAIN, 30);
 	public static Font playButtonFont = new Font("Arial", Font.BOLD, 50);
 	public static Font inputFieldFont = new Font("", Font.ITALIC, 40);
-	public static Font titleFont = new Font("", Font.BOLD, 75);
+	public static Font titleFont = new Font("", Font.BOLD, 150);
 	public static Font winScreenWinner = new Font("", Font.BOLD, 60);
-	public static Font errorFont = new Font("Arial", Font.ITALIC, 20);
-	public static Font respawnTimerFont = new Font("Arial", Font.BOLD, 70);
 	
 	public static void LoadFonts() {
 	}
 	
 	public static void drawCenteredText(Graphics g, String text, int x, int y, Font font) {
-		System.out.println(font);
 		FontMetrics metrics = g.getFontMetrics(font);
 		
 		x = x - metrics.stringWidth(text) / 2;

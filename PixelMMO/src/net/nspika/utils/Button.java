@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import net.nspika.handler.MouseHandler;
 
 public class Button {
+	
 	private int x, y;
 	private int width, height;
 	private int arcWidth, arcHeight;
@@ -19,7 +20,6 @@ public class Button {
 	private Font font;
 	private Color color = Color.BLACK;
 	private Color textColor = Color.WHITE;
-	
 	
 	public Button(int x, int y, int width, int height) {
 		this.x = x;
