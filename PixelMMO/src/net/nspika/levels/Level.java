@@ -6,6 +6,7 @@ import net.nspika.entities.creatures.Player;
 import net.nspika.entities.statics.Tree;
 import net.nspika.handler.EntityHandler;
 import net.nspika.handler.Handler;
+import net.nspika.handler.KeyHandler;
 import net.nspika.tiles.Tile;
 import net.nspika.utils.Utils;
 
@@ -17,10 +18,11 @@ public class Level {
 	private int[][] tiles;
 	private int spawnX, spawnY;
 	private EntityHandler entityManager;
+	private KeyHandler keyHandler;
 
 	public Level(Handler handler, String path) {
 		this.handler = handler;
-		entityManager = new EntityHandler(handler, new Player(handler, 100, 100, "Test"));
+		entityManager = new EntityHandler(handler, new Player(handler, keyHandler, 100, 100, "IT IS A LONG NAME"));
 		
 		entityManager.addEntity(new Tree(handler, 10, 250));
 		

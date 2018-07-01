@@ -11,6 +11,11 @@ public class Packet00Login extends Packet {
 		super(00);
 		this.username = readData(data);
 	}
+	
+	public Packet00Login(String username) {
+		super(00);
+		this.username = username;
+	}
 
 	@Override
 	public void writeData(GameClient client) {

@@ -18,20 +18,20 @@ public class Camera {
 	public void checkBlankSpace() {
 		if (xOffset < 0) {
 			xOffset = 0;
-		} else if (xOffset > handler.getLevel().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
-			xOffset = handler.getLevel().getWidth() * Tile.TILEWIDTH - handler.getWidth();
+		} else if (xOffset > handler.getLevel().getWidth() * Tile.TILEWIDTH - Handler.getWidth()) {
+			xOffset = handler.getLevel().getWidth() * Tile.TILEWIDTH - Handler.getWidth();
 		}
 
 		if (yOffset < 0) {
 			yOffset = 0;
-		} else if (yOffset > handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
-			yOffset = handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
+		} else if (yOffset > handler.getLevel().getHeight() * Tile.TILEHEIGHT - Handler.getHeight()) {
+			yOffset = handler.getLevel().getHeight() * Tile.TILEHEIGHT - Handler.getHeight();
 		}
 	}
 
 	public void centerOnEntity(Entity e) {
-		xOffset = e.getX() - handler.getWidth() / 2 + e.getWidth() / 2;
-		yOffset = e.getY() - handler.getHeight() / 2 + e.getHeight() / 2;
+		xOffset = e.getX() - Handler.getWidth() / 2 + e.getWidth() / 2;
+		yOffset = e.getY() - Handler.getHeight() / 2 + e.getHeight() / 2;
 		checkBlankSpace();
 	}
 

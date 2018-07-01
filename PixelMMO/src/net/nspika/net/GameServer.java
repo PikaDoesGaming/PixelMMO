@@ -64,11 +64,14 @@ public class GameServer extends Thread {
 					"[" + address.getHostAddress() + ":" + port + "]" + packet.getUsername() + " has connected...");
 			PlayerMP player = null;
 			if (address.getHostAddress().equalsIgnoreCase("127.0.0.1")) {
+				player = new PlayerMP(handler, 100, 100,Handler.getGame().getKeyHandler(), packet.getUsername(), address, port);
+			}else {
 				player = new PlayerMP(handler, 100, 100, packet.getUsername(), address, port);
 			}
 			if (player != null) {
 				this.connectedPlayers.add(player);
-				EntityHandler entityManager = new EntityHandler(handler, player);
+				EntityHandler entityHandler = new EntityHandler(handler, player);
+				EntityHandler.player = player;
 				
 			}
 			break;

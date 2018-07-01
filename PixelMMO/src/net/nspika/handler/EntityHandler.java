@@ -9,7 +9,7 @@ import net.nspika.entities.creatures.Player;
 public class EntityHandler {
 
 	private Handler handler;
-	private Player player;
+	public static Player player;
 	
 	public ArrayList<Entity> entities;
 	public ArrayList<Player> players;

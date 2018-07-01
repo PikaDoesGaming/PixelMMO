@@ -15,6 +15,7 @@ import net.nspika.handler.KeyHandler;
 import net.nspika.handler.MouseHandler;
 import net.nspika.net.GameClient;
 import net.nspika.net.GameServer;
+import net.nspika.net.packets.Packet00Login;
 import net.nspika.states.GameState;
 import net.nspika.states.MenuState;
 import net.nspika.states.State;
@@ -70,7 +71,10 @@ public class Game implements Runnable {
         menuState = new MenuState(handler);
         gameState = new GameState(handler);
         State.setState(gameState);
-        gameClient.sendData("ping".getBytes());
+        
+        Packet00Login loginPacket = new Packet00Login(JOptionPane.showInputDialog(this, "Please enter a name"));
+        loginPacket.writeData(gameClient);
+        //gameClient.sendData("ping".getBytes());
         
     }
     

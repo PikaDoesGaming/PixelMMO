@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import net.nspika.gfx.Animation;
 import net.nspika.gfx.Assets;
 import net.nspika.handler.Handler;
+import net.nspika.handler.KeyHandler;
 import net.nspika.tiles.Tile;
 
 public class Player extends Creature {
@@ -16,11 +17,29 @@ public class Player extends Creature {
     private Animation anUp;
     private Animation anLeft;
     private Animation anRight;
+    private KeyHandler keyHandler;
     
     private String username;
 
     private int direction = 0;
 
+    public Player(Handler handler, KeyHandler keyHandler, float x, float y, String username) {
+        super(handler, x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
+        this.username = username;
+        this.keyHandler = keyHandler;
+        
+        bounds.x = 48;
+        bounds.y = 68;
+        bounds.width = 32;
+        bounds.height = 48;
+        
+        //Animations
+        anDown = new Animation(135, Assets.player_down);
+        anLeft = new Animation(135, Assets.player_left);
+        anUp = new Animation(135, Assets.player_up);
+        anRight = new Animation(135, Assets.player_right);
+    }
+    
     public Player(Handler handler, float x, float y, String username) {
         super(handler, x, y, Creature.D_WIDTH * 4, Creature.D_HEIGHT * 4);
         this.username = username;
@@ -104,6 +123,6 @@ public class Player extends Creature {
         g.setColor(Color.WHITE);
         Font myFont = new Font("Serif", Font.BOLD, 50);
         g.setFont(myFont);
-        g.drawString(username, (int) (x + bounds.x - handler.getCamera().getxOffset()) - 32, (int) (y + bounds.y - handler.getCamera().getyOffset()) - 70);
+        g.drawString(username, (int) ((x - handler.getCamera().getxOffset()) - ((username.length() - 1) / 2 * 16)) - 32, (int) (y - handler.getCamera().getyOffset()) - 10);
     }
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import net.nspika.handler.Handler;
+import net.nspika.levels.Level;
 
 public abstract class Entity {
 

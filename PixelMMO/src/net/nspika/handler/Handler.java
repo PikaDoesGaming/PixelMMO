@@ -12,7 +12,7 @@ public class Handler {
 	private Level level;
 	
 	public Handler(Game game) {
-		this.game = game;
+		Handler.game = game;
 	}
 	
 	public Camera getCamera() {
@@ -36,7 +36,7 @@ public class Handler {
 	}
 	
 	public void setGame(Game game) {
-		this.game = game;
+		Handler.game = game;
 	}
 	
 	public Level getLevel() {
