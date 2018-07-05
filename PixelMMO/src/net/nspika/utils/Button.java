@@ -104,4 +104,8 @@ public class Button {
 	public boolean isClicked() {
 		return clicked;
 	}
+	
+	public boolean getPressed() {
+		return pressed;
+	}
 }

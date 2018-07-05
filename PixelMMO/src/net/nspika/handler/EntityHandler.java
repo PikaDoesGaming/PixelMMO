@@ -16,7 +16,7 @@ public class EntityHandler {
 	
 	public EntityHandler(Handler handler, Player player) {
 		this.handler = handler;
-		this.player = player;
+		EntityHandler.player = player;
 		entities = new ArrayList<Entity>();
 	}
 	
@@ -39,6 +39,10 @@ public class EntityHandler {
 		entities.add(e);
 	}
 	
+	public void removeEntity(Entity e) {
+		entities.remove(e);
+	}
+	
 	// GETTERS SETTERS
 
 	public Handler getHandler() {
@@ -54,7 +58,7 @@ public class EntityHandler {
 	}
 
 	public void setPlayer(Player player) {
-		this.player = player;
+		EntityHandler.player = player;
 	}
 
 	public ArrayList<Entity> getEntities() {

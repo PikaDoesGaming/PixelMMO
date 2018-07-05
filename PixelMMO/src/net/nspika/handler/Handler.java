@@ -1,15 +1,19 @@
 package net.nspika.handler;
 
+import net.nspika.entities.creatures.Player;
 import net.nspika.game.Game;
 import net.nspika.gfx.Camera;
 import net.nspika.levels.Level;
 import net.nspika.net.GameClient;
 import net.nspika.net.GameServer;
+import net.nspika.ui.MenuScreen;
 
 public class Handler {
 
 	private static Game game;
 	private Level level;
+	private MenuScreen menuScreen;
+	private Player player;
 	
 	public Handler(Game game) {
 		Handler.game = game;
@@ -17,6 +21,10 @@ public class Handler {
 	
 	public Camera getCamera() {
 		return game.getCamera();
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 	
 	public KeyHandler getKeyHandler() {
@@ -45,6 +53,10 @@ public class Handler {
 	
 	public void setLevel(Level level) {
 		this.level = level;
+	}
+	
+	public MenuScreen getMenu() {
+		return menuScreen;
 	}
 
 	/*

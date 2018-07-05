@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 import net.nspika.entities.creatures.Player;
 import net.nspika.entities.statics.Tree;
-import net.nspika.game.Game;
 import net.nspika.handler.Handler;
 import net.nspika.levels.Level;
 
@@ -30,5 +29,6 @@ public class GameState extends State {
 	public void render(Graphics g) {
 		level.render(g);
 	}
+	
 
 }

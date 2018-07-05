@@ -3,6 +3,7 @@ package net.nspika.entities.creatures;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import net.nspika.gfx.Animation;
@@ -58,6 +59,7 @@ public class Player extends Creature {
 
     @Override
     public void tick() {
+    	username = getUsername();
     	if(x < 0) {
     		x += speed;
     	}
@@ -72,7 +74,6 @@ public class Player extends Creature {
     	if(y > handler.getLevel().getHeight() * Tile.TILEHEIGHT - handler.getLevel().getHeight()) {
     		y -= speed;
     	}
-    	
         anDown.tick();
         anUp.tick();
         anLeft.tick();
@@ -123,6 +124,15 @@ public class Player extends Creature {
         g.setColor(Color.WHITE);
         Font myFont = new Font("Serif", Font.BOLD, 50);
         g.setFont(myFont);
-        g.drawString(username, (int) ((x - handler.getCamera().getxOffset()) - ((username.length() - 1) / 2 * 16)) - 32, (int) (y - handler.getCamera().getyOffset()) - 10);
+        //g.drawString(username, (int) ((x - handler.getCamera().getxOffset()) - ((username.length() - 1) / 2 * 16)) - 32, (int) (y - handler.getCamera().getyOffset()) - 10);
+        g.drawString(username, (int) ((x - handler.getCamera().getxOffset()) - ((getUsername().length() - 1) / 2 * 16)) - 32, (int) (y - handler.getCamera().getyOffset()) - 10);
+    }
+    
+    public void setUsername(String username) {
+    	this.username = username;
+    }
+    
+    public String getUsername() {
+    	return username;
     }
 }

@@ -45,8 +45,8 @@ public class Game implements Runnable {
     
     private Camera camera;
     
-    private GameServer gameServer;
-    private GameClient gameClient;
+//    private GameServer gameServer;
+//    private GameClient gameClient;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -60,20 +60,22 @@ public class Game implements Runnable {
     private void init() {
     	Fonts.LoadFonts();
         display = new Display(title, width, height);
-        display.getFrame().addKeyListener(keyHandler);
-        display.getFrame().addMouseListener(mouseHandler);
+        display.getCanvas().addKeyListener(keyHandler);
+        display.getCanvas().addMouseListener(mouseHandler);
+        display.getCanvas().addMouseMotionListener(mouseHandler);
+        display.getCanvas().requestFocus();
         Assets.init();
         
         handler = new Handler(this);
         camera = new Camera(handler, 0, 0);
        
         //States initialization
-        menuState = new MenuState(handler);
-        gameState = new GameState(handler);
-        State.setState(gameState);
+        menuState = new MenuState(handler, keyHandler);
+        State.setState(menuState);
+        //gameState = new GameState(handler);
         
-        Packet00Login loginPacket = new Packet00Login(JOptionPane.showInputDialog(this, "Please enter a name"));
-        loginPacket.writeData(gameClient);
+//        Packet00Login loginPacket = new Packet00Login(JOptionPane.showInputDialog(this, "Please enter a name"));
+//        loginPacket.writeData(gameClient);
         //gameClient.sendData("ping".getBytes());
         
     }
@@ -81,17 +83,18 @@ public class Game implements Runnable {
 
     public synchronized void start() {
         running = true;
+        new Thread(this).start();
         
         //Initializing Multiplayer
-        int reply = JOptionPane.showConfirmDialog(null, "Do you want to Host the Server?", title, JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-        	System.out.println("Starting the Server...");
-      		gameServer = new GameServer(this);
-      		gameServer.start();
-        }
-           	gameClient = new GameClient(this, "localhost");
-           	gameClient.start();
-           	new Thread(this).start();
+//        int reply = JOptionPane.showConfirmDialog(null, "Do you want to Host the Server?", title, JOptionPane.YES_NO_OPTION);
+//        if (reply == JOptionPane.YES_OPTION) {
+//        	System.out.println("Starting the Server...");
+//      		gameServer = new GameServer(this);
+//      		gameServer.start();
+//        }
+//           	gameClient = new GameClient(this, "localhost");
+//           	gameClient.start();
+           	
        }
 
     private synchronized void stop() {
@@ -167,11 +170,11 @@ public class Game implements Runnable {
 
     private void tick() {
         keyHandler.tick();
-        MouseHandler.tick();
 
         if(State.getSate() != null){
             State.getSate().tick();
         }
+        MouseHandler.tick();
         tickCount++;
     }
     

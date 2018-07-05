@@ -122,6 +122,7 @@ public class InputField {
 			g.drawRect(x, y, width, height);
 		}
 		
+		g.setColor(Color.WHITE);
 		g.setFont(Fonts.inputFieldFont);
 		g.drawString(text, x + TEXT_X_OFFSET, y + height - TEXT_Y_OFFSET);
 	}

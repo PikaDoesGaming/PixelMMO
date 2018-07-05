@@ -15,14 +15,16 @@ import net.nspika.handler.Handler;
 import net.nspika.net.packets.Packet;
 import net.nspika.net.packets.Packet.PacketTypes;
 import net.nspika.net.packets.Packet00Login;
+import net.nspika.utils.InputField;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
 	private Game game;
 	private List<PlayerMP> connectedPlayers = new ArrayList<PlayerMP>();
 	private Handler handler;
-
+	
 	public GameServer(Game game) {
+		
 		this.game = game;
 		try {
 			this.socket = new DatagramSocket(12345);
@@ -42,12 +44,13 @@ public class GameServer extends Thread {
 			}
 			parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
 
-			
-			  String message = new String(packet.getData()); System.out.println("CLIENT ["
-			  + packet.getAddress().getHostAddress() + ":" + packet.getPort() + "] > "+
-			  message); if (message.trim().equalsIgnoreCase("ping")) {
-			  sendData("pong".getBytes(), packet.getAddress(), packet.getPort()); }
-			 
+			String message = new String(packet.getData());
+			System.out.println(
+					"CLIENT [" + packet.getAddress().getHostAddress() + ":" + packet.getPort() + "] > " + message);
+			if (message.trim().equalsIgnoreCase("ping")) {
+				sendData("pong".getBytes(), packet.getAddress(), packet.getPort());
+			}
+
 		}
 	}
 
@@ -64,15 +67,16 @@ public class GameServer extends Thread {
 					"[" + address.getHostAddress() + ":" + port + "]" + packet.getUsername() + " has connected...");
 			PlayerMP player = null;
 			if (address.getHostAddress().equalsIgnoreCase("127.0.0.1")) {
-				player = new PlayerMP(handler, 100, 100,Handler.getGame().getKeyHandler(), packet.getUsername(), address, port);
-			}else {
-				player = new PlayerMP(handler, 100, 100, packet.getUsername(), address, port);
+				player = new PlayerMP(handler, 100, 100, Handler.getGame().getKeyHandler(), packet.getUsername(),
+						address, port);
+			} else {
+				player = new PlayerMP(handler, 100, 100, handler.getMenu().getName() , address, port);
 			}
 			if (player != null) {
 				this.connectedPlayers.add(player);
 				EntityHandler entityHandler = new EntityHandler(handler, player);
 				EntityHandler.player = player;
-				
+
 			}
 			break;
 		case DISCONNECT:

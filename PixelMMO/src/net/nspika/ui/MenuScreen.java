@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import net.nspika.handler.Handler;
 import net.nspika.handler.KeyHandler;
+import net.nspika.handler.MouseHandler;
+import net.nspika.levels.Level;
 import net.nspika.states.GameState;
 import net.nspika.states.State;
 import net.nspika.utils.Button;
@@ -13,15 +15,9 @@ import net.nspika.utils.InputField;
 
 public class MenuScreen {
 
-	private boolean isclicked = false;
 	private GameState gameState;
-	private Handler handler;
-	private KeyHandler keyHandler;
-	private Button start;
-
 	// Buttons
 	private static final int joinButtonYOffset = Handler.getHeight() * 3 / 4;
-	private static final int joinButtonXDistance = 100;
 	private static final int joinButtonWidth = 500;
 	private static final int joinButtonHeight = 120;
 
@@ -30,16 +26,17 @@ public class MenuScreen {
 	private static final int inputFieldHeight = 50;
 
 	private static final int errorYOffset = inputFieldYOffset - 30;
+	
+	public static String name;
 
 	private Button joinServerButton;
 	private Button createServerButton;
 	private InputField inputField;
+	private Handler handler;
+	private Level level;
 
 	public MenuScreen(Handler handler, KeyHandler keyHandler) {
 		this.handler = handler;
-		this.keyHandler = keyHandler;
-		gameState = new GameState(handler);
-
 		joinServerButton = new Button(50, joinButtonYOffset / 2, joinButtonWidth, joinButtonHeight, 15, 15);
 		joinServerButton.setColor(Color.GREEN);
 		joinServerButton.setFont(Fonts.playButtonFont);
@@ -52,7 +49,7 @@ public class MenuScreen {
 		createServerButton.setText("Create a Server");
 		createServerButton.setTextColor(Color.WHITE);
 
-		inputField = new InputField(handler.getKeyHandler(), Handler.getWidth() / 2 + 205,
+		inputField = new InputField(keyHandler, Handler.getWidth() / 2 + 205,
 				Handler.getHeight() / 2 + 285, inputFieldWidth, inputFieldHeight, "username", 10, 10);
 	}
 
@@ -61,10 +58,15 @@ public class MenuScreen {
 		joinServerButton.tick();
 		createServerButton.tick();
 		inputField.tick();
-
+		
+		name = getName();
+		
 		if (joinServerButton.isClicked() || createServerButton.isClicked()) {
+			gameState = new GameState(handler);
+			System.out.println("Buttons was pressed");
 			State.setState(gameState);
 		}
+		
 	}
 
 	public void render(Graphics g) {
@@ -75,6 +77,10 @@ public class MenuScreen {
 		createServerButton.render(g);
 		g.drawRect(Handler.getWidth() / 2 + 200, Handler.getHeight() / 2 - 200, Handler.getWidth()* 1/4 + 20, Handler.getHeight() / 2);
 		inputField.render(g);
+	}
+	
+	public String getName() {
+		return inputField.getText();
 	}
 
 }

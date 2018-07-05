@@ -30,6 +30,9 @@ public class KeyHandler implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+    	for(InputField inputField : activeInputFields) {
+			inputField.onKeyTyped(e);
+		}
     }
 
     @Override
