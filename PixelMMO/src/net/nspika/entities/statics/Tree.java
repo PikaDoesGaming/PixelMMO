@@ -16,6 +16,11 @@ public class Tree extends StaticEntity {
 
 	@Override
 	public void tick() {
+		if(x < 500) {
+			x++;
+		}else {
+			x = 100;
+		}
 	}
 
 	@Override
