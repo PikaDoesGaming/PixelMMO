@@ -54,7 +54,6 @@ public class MenuScreen {
 	}
 
 	public void tick() {
-		//State.setState(gameState);
 		joinServerButton.tick();
 		createServerButton.tick();
 		inputField.tick();
